@@ -21,7 +21,8 @@ Attributs possibles :
 - mot_de_passe
 - rôle
 - statut
-- date_creation
+- created_at
+- updated_at
 
 ---
 
@@ -179,6 +180,8 @@ Une commerçante possède une seule boutique.
 - date_debut_essai
 - date_fin_essai
 - created_at
+- updated_at
+
 
 ## Relations
 

@@ -24,14 +24,15 @@ Stocke les informations des commerces enregistrés.
 
 | Champ | Type | Description |
 |---|---|---|
-| id | UUID / INT | Identifiant unique |
+| id | UUID | Identifiant unique |
 | nom | VARCHAR | Nom de la boutique |
 | telephone | VARCHAR | Contact |
 | adresse | TEXT | Adresse |
-| statut | ENUM | ESSAI, ACTIVE, EXPIREE, SUSPENDUE |
+| statut | ENUM | ESSAI, ACTIVE, EXPIREE, SUSPENDUE , EN_ATTENTE|
 | date_debut_essai | DATE | Début période d'essai |
 | date_fin_essai | DATE | Fin période d'essai |
 | created_at | DATE | Date création |
+| updated_at | DATE | Date modification |
 
 ---
 
@@ -51,9 +52,10 @@ Utilisateurs ayant accès à l'application.
 | telephone | VARCHAR | Téléphone |
 | password_hash | VARCHAR | Mot de passe crypté |
 | role | ENUM | SUPER_ADMIN, ADMIN_BOUTIQUE, EMPLOYE |
-| statut | ENUM | ACTIF, BLOQUE |
+| statut | ENUM | ACTIF, SUSPENDU, DESACTIVE |
 | boutique_id | FK | Boutique associée |
 | created_at | DATE | Date création |
+| updated_at | DATE | Date modification |
 
 ## Relation
 
