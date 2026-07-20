@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum StatutBoutique {
+  EN_ATTENTE
+  ESSAI
+  ACTIVE
+  EXPIREE
+  SUSPENDUE
+}
+
+enum RoleUtilisateur {
+  SUPER_ADMIN
+  ADMIN_BOUTIQUE
+  EMPLOYE
+}
+
+enum StatutUtilisateur {
+  ACTIF
+  SUSPENDU
+  DESACTIVE
+}
+
+model Boutique {
+  id String @id @default(uuid())
+
+  nom       String
+  telephone String?
+  adresse   String?
+
+  statut StatutBoutique @default(EN_ATTENTE)
+
+  dateDebutEssai DateTime? @map("date_debut_essai")
+  dateFinEssai   DateTime? @map("date_fin_essai")
+
+  utilisateurs Utilisateur[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("boutiques")
+}
+
+model Utilisateur {
+  id String @id @default(uuid())
+
+  nom String
+
+  telephone String?
+  email     String  @unique
+
+  passwordHash String @map("password_hash")
+
+  role RoleUtilisateur @default(EMPLOYE)
+
+  statut StatutUtilisateur @default(ACTIF)
+
+  boutiqueId String @map("boutique_id")
+
+  boutique Boutique @relation(fields: [boutiqueId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("utilisateurs")
+}
